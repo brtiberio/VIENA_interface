@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
+<title>Viena Interface</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="starter-template.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- NAVIGATION BAR-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> <a class="navbar-brand" href="dashboard.html">Viena Interface</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active"> <a class="nav-link" href="dashboard.html">Dashboard <span class="sr-only">(current)</span></a> </li>
+      <li class="nav-item"> <a class="nav-link" href="battery.html">Battery</a> </li>
+      <li class="nav-item"> <a class="nav-link disabled" href="#"> WHAT MORE?</a> </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Body of the interface	--> 
+
+<!-- Connections Status -->
+<div class="container-fluid main-content">
+  <div class="starter-template">
+    <h1>Status Overview</h1>
+    <p class="lead">
+    <table class="table">
+      <thead>
+        <tr class="tr">
+          <th scope ="col" class = "th center">Server Connection</th>
+          <th scope ="col" class = "th center">Controller Connection</th>
+          <th scope ="col" class = "th center">Battery</th>
+          <th scope ="col" class = "th center">Canopen Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class = "tr">
+          <td class ="td"><div class="row led led-red" id ="led_serv_con"></div></td>
+          <td class ="td"><div class="row led led-red" id ="led_con_controller"></div></td>
+          <td class ="td"><div class="row led led-red" id ="led_bat"></div></td>
+          <td class ="td"><div class="row led led-red" id ="led_can"></div></td>
+        </tr>
+      </tbody>
+    </table>
+    </p>
+  </div>
+  
+  <!-- Connection panel -->
+  
+  <div class="form-group">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body" id="serverCollapse">
+          <form>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="hostInput">Host</label>
+              </div>
+              <div class="col-md-2">
+                <label for="portInput">Port</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <input type="text" class="form-control" id="hostInput" value="raspberrypi3.local">
+              </div>
+              <div class="col-md-1">
+                <input type="text" class="form-control" id="portInput" value="8080">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="pathInput">Path</label>
+                  <input type="text" class="form-control" id="pathInput" value="/ws">
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <div class="form-group">
+                  <label for="cleanSessionInput"> <br><br> Clean Session</label>
+                  <input type="checkbox" class="special-checkbox" id="cleanSessionInput" value="" checked>
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <div class="form-group">
+                  <label for="lwRetainInput"> <br><br> Retain</label>
+                  <input type="checkbox" class="special-checkbox" id="lwRetainInput" value="">
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group">
+                  <label for="clientConnectButton"></label>
+                  <br>
+                  <a id="clientConnectButton" class="btn btn-outline-secondary"  onclick="connectionToggle();">Connect</a> </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Connection panel --> 
+  <!-- History log -->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"> History </div>
+        <div class="panel-body" id="historyCollapse"> <span class="right"><a href="#" onclick="clearHistory()">Clear History</a></span>
+          <table class="table table-bordered table-striped table-hover table-condensed  tableSection" id="incomingMessageTable">
+            <thead>
+              <tr class="tr">
+                <th class="th">Topic</th>
+                <th class="th">Payload</th>
+                <th class="th">Time</th>
+                <th class="th">QOS</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+<script>window.jQuery || document.write('<script src="js/jquery-slim.min.js"><\/script>')</script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> 
+<script src="js/myscript.js" type="text/javascript"></script>
+</body>
+</html>
