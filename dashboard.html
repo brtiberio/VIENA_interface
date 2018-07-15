@@ -1,149 +1,186 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="favicon.ico">
-<title>Viena Interface</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="Viena MQTT Interface" content="">
+  <meta name="Viena Team" content="">
+  <link rel="icon" href="favicon.ico">
+  <title>Viena Interface</title>
 
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="starter-template.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/styles.css" rel="stylesheet">
+  <!-- favicon items -->
+  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!--  Font Awesome -->
+  <link rel="stylesheet" href="css/fontawesome.css">
 </head>
 
-<body>
-<!-- NAVIGATION BAR-->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> <a class="navbar-brand" href="dashboard.html">Viena Interface</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active"> <a class="nav-link" href="dashboard.html">Dashboard <span class="sr-only">(current)</span></a> </li>
-      <li class="nav-item"> <a class="nav-link" href="battery.html">Battery</a> </li>
-      <li class="nav-item"> <a class="nav-link disabled" href="#"> WHAT MORE?</a> </li>
-    </ul>
-  </div>
-</nav>
-
-<!-- Body of the interface	--> 
-
-<!-- Connections Status -->
-<div class="container-fluid main-content">
-  <div class="starter-template">
-    <h1>Status Overview</h1>
-    <p class="lead">
-    <table class="table">
-      <thead>
-        <tr class="tr">
-          <th scope ="col" class = "th center">Server Connection</th>
-          <th scope ="col" class = "th center">Controller Connection</th>
-          <th scope ="col" class = "th center">Battery</th>
-          <th scope ="col" class = "th center">Canopen Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class = "tr">
-          <td class ="td"><div class="row led led-red" id ="led_serv_con"></div></td>
-          <td class ="td"><div class="row led led-red" id ="led_con_controller"></div></td>
-          <td class ="td"><div class="row led led-red" id ="led_bat"></div></td>
-          <td class ="td"><div class="row led led-red" id ="led_can"></div></td>
-        </tr>
-      </tbody>
-    </table>
-    </p>
-  </div>
-  
-  <!-- Connection panel -->
-  
-  <div class="form-group">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-body" id="serverCollapse">
-          <form>
+<body class="pt-5">
+  <!-- NAVIGATION BAR-->
+  <nav class="navbar navbar-expand-md navbar-light bg-light rounded">
+    <span class="navbar-brand mb-0 h1 ">
+      <img src="img/IST_A_RGB_POS.png" height="50"> VIENA Interface
+    </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <!-- Nav pills -->
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="pill" href="#dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#menu1">Battery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#menu2">Steering</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#menu3">Log</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Body of the interface	-->
+  <main>
+    <!--Create card for status overview-->
+    <div class="container-fluid" style="margin-top:80px">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center">Status Overview</h4>
+          </div>
+          <div class="card-body">
             <div class="row">
-              <div class="col-md-2">
-                <label for="hostInput">Host</label>
+              <div class="col-sm-3 text-center">Broker
+                <br>
+                <div class=" led led-red" id="led_serv_con"></div>
               </div>
-              <div class="col-md-2">
-                <label for="portInput">Port</label>
+              <div class="col-sm-3 text-center">Controller
+                <br>
+                <div class=" led led-red" id="led_con_controller"></div>
+              </div>
+              <div class="col-sm-3 text-center">Battery
+                <br>
+                <div class=" led led-red" id="led_bat"></div>
+              </div>
+              <div class="col-sm-3 text-center">Canopen
+                <br>
+                <div class="led led-red" id="led_can"></div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-2">
-                <input type="text" class="form-control" id="hostInput" value="raspberrypi3.local">
+          </div>
+        </div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="dashboard" class="container-fluid tab-pane active mt-3 px-0">
+            <div class="card">
+              <div class="card-header">
+                Broker server settings
               </div>
-              <div class="col-md-1">
-                <input type="text" class="form-control" id="portInput" value="8080">
+              <div class="body">
+                <form>
+                  <fieldset id="server-settings">
+                    <div class="form-row p-2">
+                      <div class="form-group col-sm-8">
+                        <label for="hostInput">Host</label>
+                        <input type="text" class="form-control" id="hostInput" value="raspberrypi3.local">
+                      </div>
+                      <div class="form-group col-sm-4">
+                        <label for="portInput">Port</label>
+                        <input type="text" class="form-control" id="portInput" value="8080">
+                      </div>
+                    </div>
+                    <div class="form-row px-2">
+                      <div class="form-group col-sm-4">
+                        <label for="pathInput">Path</label>
+                        <input type="text" class="form-control" id="pathInput" value="/mqtt">
+                      </div>
+                      <div class=" form-group col-sm-4 px-2">
+                        <label for="cleanSessionInput"> Clean Session
+                          <input type="checkbox" class="special-checkbox" id="cleanSessionInput" value="" checked>
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="card-footer text-right">
+                <a id="clientConnectButton" class="btn btn-outline-secondary" onclick="connectionToggle();">Connect</a>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-2">
-                <div class="form-group">
-                  <label for="pathInput">Path</label>
-                  <input type="text" class="form-control" id="pathInput" value="/ws">
-                </div>
+          </div>
+          <div id="menu1" class="container-fluid tab-pane fade ">
+            <br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div id="menu2" class="container-fluid tab-pane fade ">
+            <br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+            </p>
+          </div>
+          <div id="menu3" class="container-fluid tab-pane fade mt-3 px-0">
+            <div class="card mt-2 ">
+              <div class="card-header ">
+                <h2>Log messages received</h2>
               </div>
-              <div class="col-sm-1">
-                <div class="form-group">
-                  <label for="cleanSessionInput"> <br><br> Clean Session</label>
-                  <input type="checkbox" class="special-checkbox" id="cleanSessionInput" value="" checked>
+              <div class="card-body ">
+                <button type="button " class="btn btn-light " onclick="clearHistory() ">Clear History</button>
+                <div class="table-responsive ">
+                  <table class="table table-bordered table-hover table-sm " id="incomingMessageTable ">
+                    <thead>
+                      <tr>
+                        <th scope="col ">Topic</th>
+                        <th scope="col ">Payload</th>
+                        <th scope="col ">Time</th>
+                        <th scope="col ">QOS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-              <div class="col-sm-1">
-                <div class="form-group">
-                  <label for="lwRetainInput"> <br><br> Retain</label>
-                  <input type="checkbox" class="special-checkbox" id="lwRetainInput" value="">
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="form-group">
-                  <label for="clientConnectButton"></label>
-                  <br>
-                  <a id="clientConnectButton" class="btn btn-outline-secondary"  onclick="connectionToggle();">Connect</a> </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- End of Connection panel --> 
-  <!-- History log -->
-  
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading"> History </div>
-        <div class="panel-body" id="historyCollapse"> <span class="right"><a href="#" onclick="clearHistory()">Clear History</a></span>
-          <table class="table table-bordered table-striped table-hover table-condensed  tableSection" id="incomingMessageTable">
-            <thead>
-              <tr class="tr">
-                <th class="th">Topic</th>
-                <th class="th">Payload</th>
-                <th class="th">Time</th>
-                <th class="th">QOS</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Bootstrap core JavaScript
-    ================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
-<script>window.jQuery || document.write('<script src="js/jquery-slim.min.js"><\/script>')</script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> 
-<script src="js/myscript.js" type="text/javascript"></script>
+  </main>
+  <!-- Bootstrap core JavaScript-->
+  <!--================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery-3.3.1.min.js " type="text/javascript "></script></script>
+  <script src="js/popper.min.js "></script>
+  <script src="js/bootstrap.min.js "></script>
+  <script src="js/mqttws31.min.js " type="text/javascript "></script>
+  <script src="js/myscript.js " type="text/javascript "></script>
 </body>
+
 </html>

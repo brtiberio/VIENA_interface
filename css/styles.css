@@ -1,5 +1,5 @@
 .led {
-    margin: 0px auto;
+    margin: 5px auto;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -27,4 +27,7 @@ body {background-color: #FFFFFF;}
 
 .table-striped tbody tr:nth-of-type(odd) {
 	background-color: #009DE0;
+}
+.color-tecnico{
+    background-color: #009DE0;
 }
