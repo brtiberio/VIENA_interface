@@ -108,10 +108,9 @@ function onMessageArrived(message) {
 		// Insert into History Table
 		var table = document.getElementById("incomingMessageTable").getElementsByTagName('tbody')[0];
 		var row = table.insertRow(0);
-		row.insertCell(0).innerHTML = message.destinationName;
-		row.insertCell(1).innerHTML = safe_tags_regex(message.payloadString);
-		row.insertCell(2).innerHTML = messageTime;
-		row.insertCell(3).innerHTML = message.qos;
+		row.insertCell(0).innerHTML = safe_tags_regex(message.payloadString);
+		row.insertCell(1).innerHTML = messageTime;
+		row.insertCell(2).innerHTML = message.qos;
 	}
 }
 
