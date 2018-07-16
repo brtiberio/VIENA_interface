@@ -104,7 +104,7 @@ function onMessageArrived(message) {
 		}
 	}
 	if (message.destinationName === (baseTopic + "logger")) {
-		var messageTime = new Date().toISOString();
+		var messageTime = new Date().toLocaleString();
 		// Insert into History Table
 		var table = document.getElementById("incomingMessageTable").getElementsByTagName('tbody')[0];
 		var row = table.insertRow(0);
