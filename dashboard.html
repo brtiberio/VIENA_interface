@@ -219,7 +219,7 @@
                   <div class="input-group mb-3">
                     <input disabled="true" type="text" class="form-control bg-light" placeholder="state ID">
                     <div class="input-group-append">
-                      <button class="btn btn-success" type="button" id="refreshState" onclick="requestState()"><i id="refreshStateIcon" class="fa fa-sync"></i></button>
+                      <button class="btn btn-success" type="button" id="refreshState" style="box-shadow: none;" onclick="requestState()"><i id="refreshStateIcon" class="fa fa-sync"></i></button>
                     </div>
                   </div>
                 </div>
@@ -235,7 +235,7 @@
                 <small class="text-muted">Last 15 messages only</small>
               </div>
               <div class="card-body">
-                <button type="button" class="btn btn-light" onclick="clearHistory()">Clear History</button>
+                <button type="button" class="btn btn-outline-info btn-sm mb-1" style="box-shadow: none;" onclick="clearHistory()">Clear History</button>
                 <div class="table-responsive ">
                   <table class="table table-bordered table-hover table-sm" id="incomingMessageTable">
                     <thead>
