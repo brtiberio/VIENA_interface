@@ -112,7 +112,7 @@ function onMessageArrived(message) {
 		row.insertCell(1).innerHTML = safe_tags_regex(message.payloadString);
 		row.insertCell(2).innerHTML = messageTime;
 		row.insertCell(3).innerHTML = message.qos;
-		if (table.row.length > 15){
+		if (table.row.length > 15) {
 			table.deleteRow(15);
 		}
 	}
@@ -141,4 +141,15 @@ function makeid() {
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
 
 	return text;
+}
+
+async function requestState(){
+	var x = document.getElementById("refreshStateIcon");
+	x.className += " fa-spin";
+	await sleep(2000);
+	x.className="fa fa-sync";
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
