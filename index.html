@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="Viena MQTT Interface" content="">
   <meta name="Viena Team" content="">
-  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="favicon/favicon.ico">
   <title>Viena Interface</title>
 
   <!-- Bootstrap core CSS -->
@@ -40,9 +40,9 @@
 <body class="pt-5">
   <!-- NAVIGATION BAR-->
   <nav class="navbar navbar-expand-md navbar-light bg-light rounded">
-    <span class="navbar-brand mb-0 h1 ">
-      <img src="img/IST_A_RGB_POS.png" height="50"> VIENA Interface
-    </span>
+    <span class="navbar-brand mb-0 ">
+      <img src="img/IST_A_RGB_POS_2.png" width="60">
+    </span><span class="text-dark mb-0 mr-2 h4"> VIENA Interface</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -97,7 +97,7 @@
         </div>
         <!-- Tab panes -->
         <div class="tab-content">
-          <div id="dashboard" class="container-fluid tab-pane active mt-3 px-0">
+          <div id="dashboard" class="container-fluid tab-pane active my-3 px-0">
             <div class="card">
               <div class="card-header">
                 Broker server settings
@@ -134,7 +134,7 @@
               </div>
             </div>
           </div>
-          <div id="menu1" class="container-fluid tab-pane fade mt-3">
+          <div id="menu1" class="container-fluid tab-pane fade my-3">
             <div class="card mt-2">
               <div class="card-header">
                 <h2>Battery Values</h2>
@@ -177,8 +177,8 @@
               </div>
             </div>
           </div>
-          <div id="menu2" class="container-fluid tab-pane fade mt-3">
-            <div class="row mt-2">
+          <div id="menu2" class="container-fluid tab-pane fade my-3">
+            <div class="row">
               <!-- Card for PID settings -->
               <div class="card col-sm-4 px-1">
                 <div class="card-header">
@@ -188,21 +188,21 @@
                   <form>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="PIDpGain">P</span>
+                        <span class="input-group-text" >P</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="pGain">
+                      <input id="PIDpGain" type="text" class="form-control" placeholder="pGain">
                     </div>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="PIDiGain">I</span>
+                        <span class="input-group-text" >I</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="iGain">
+                      <input id="PIDiGain" type="text" class="form-control" placeholder="iGain">
                     </div>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="PIDdGain">D</span>
+                        <span class="input-group-text" >D</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="dGain">
+                      <input id="PIDdGain" type="text" class="form-control" placeholder="dGain">
                     </div>
                   </form>
                 </div>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="card-body">
                   <div class="input-group mb-3">
-                    <input disabled="true" type="text" class="form-control bg-light" placeholder="state ID">
+                    <input id="stateID" disabled="true" type="text" class="form-control bg-light" placeholder="state ID">
                     <div class="input-group-append">
                       <button class="btn btn-success" type="button" id="refreshState" style="box-shadow: none;" onclick="requestState()"><i id="refreshStateIcon" class="fa fa-sync"></i></button>
                     </div>
@@ -228,7 +228,7 @@
             <!-- END  of first card row -->
           </div>
           <!-- END  of menu 2 -->
-          <div id="menu3" class="container-fluid tab-pane fade mt-3 px-0">
+          <div id="menu3" class="container-fluid tab-pane fade my-3 px-0">
             <div class="card mt-2">
               <div class="card-header">
                 <h4>Log messages received</h4>

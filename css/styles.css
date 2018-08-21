@@ -31,3 +31,7 @@ body {background-color: #FFFFFF;}
 .color-tecnico{
     background-color: #009DE0;
 }
+
+tbody {
+    font-size: small;
+}
