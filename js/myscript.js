@@ -84,8 +84,9 @@ function onConnectionLost(responseObject) {
 		document.getElementById("led_con_controller").className = "led led-red";
 		document.getElementById("led_bat").className = "led led-red";
 		document.getElementById("led_can").className = "led led-red";
-		document.getElementById("clientConnectButton").innerText = "Connect"
+		document.getElementById("clientConnectButton").innerText = "Connect";
 		document.getElementById("server-settings").disabled = false;
+		document.getElementById("epos_refresh_state").disabled = true;
 		console.log("onConnectionLost:" + responseObject.errorMessage);
 		connected = false;
 	}
@@ -94,6 +95,7 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
 
+	let jsonMessage;
 	switch (message.destinationName) {
 	    case (baseTopic + "connectStatus"):
 	        // receive mqtt controller connection status
@@ -102,15 +104,18 @@ function onMessageArrived(message) {
 		    }
 		    if (message.payloadString === "Disconnected") {
 			    document.getElementById("led_con_controller").className = "led led-red";
+				document.getElementById("epos_refresh_state").disabled = true;
 		    }
             break;
         case (baseTopic + "canopenStatus"):
             // receive canopen connection status
             if (message.payloadString === "Connected") {
 			    document.getElementById("led_can").className = "led led-green";
+				document.getElementById("epos_refresh_state").disabled = false;
 		    }
 		    if (message.payloadString === "Disconnected") {
 			    document.getElementById("led_can").className = "led led-red";
+				document.getElementById("epos_refresh_state").disabled = true;
 	    	}
             break;
         case ((baseTopic + "logger")):
@@ -134,8 +139,8 @@ function onMessageArrived(message) {
 	            document.getElementById("PIDiGain").value = "iGain";
 	            document.getElementById("PIDdGain").value = "dGain";
 	        }else{
-	            var jsonMessage = JSON.parse(message.payloadString);
-	            document.getElementById("PIDpGain").value = jsonMessage.pGain;
+				jsonMessage = JSON.parse(message.payloadString);
+				document.getElementById("PIDpGain").value = jsonMessage.pGain;
 	            document.getElementById("PIDiGain").value = jsonMessage.iGain;
 	            document.getElementById("PIDdGain").value = jsonMessage.dGain;
             }
@@ -143,15 +148,16 @@ function onMessageArrived(message) {
         case(eposTopic + "stateID"):
             document.getElementById("stateID").value = message.payloadString;
             // remove spinning effect on button if present
-            document.getElementById("refreshStateIcon").className ="fa fa-sync";
+            document.getElementById("epos_refresh_state_icon").className ="fa fa-sync";
             break;
         case(eposTopic + "rpc/response"):
             if(message.payloadString !== ""){
-                var jsonMessage = JSON.parse(message.payloadString)
+                jsonMessage = JSON.parse(message.payloadString);
                 console.log(message.payloadString);
             }
+            break;
         default:
-            console.log('Message Recieved: Topic: ', message.destinationName, '. Payload: ', message.payloadString, '. QoS: ', message.qos);
+            console.log('Message Received: Topic: ', message.destinationName, '. Payload: ', message.payloadString, '. QoS: ', message.qos);
     }
     // receive mqtt controller connection status
 	if (message.destinationName === (baseTopic + "connectStatus")) {
@@ -198,7 +204,7 @@ function makeid() {
 }
 
 async function requestState(){
-	let x = document.getElementById("refreshStateIcon");
+	let x = document.getElementById("epos_refresh_state_icon");
 	x.className += " fa-spin";
 	let jsonMessage = {request: "stateID"};
 	jsonMessage = JSON.stringify(jsonMessage);
