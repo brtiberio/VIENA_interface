@@ -13,41 +13,6 @@ var client;
 var eposTopic = "VIENA/steering/";
 
 
-
-
-// connect the client
-function connectionToggle() {
-	if (connected) {
-		client.disconnect();
-		document.getElementById("led_serv_con").className = "led led-red";
-		document.getElementById("led_con_controller").className = "led led-red";
-		document.getElementById("led_bat").className = "led led-red";
-		document.getElementById("led_can").className = "led led-red";
-		document.getElementById("server-settings").disabled = false;
-		connected = false;
-		document.getElementById("clientConnectButton").innerText = "Connect";
-	} else {
-		hostname = document.getElementById("hostInput").value;
-		port = document.getElementById("portInput").value;
-		path = document.getElementById("pathInput").value;
-		cleanSession = document.getElementById("cleanSessionInput").checked;
-		retained = document.getElementById("cleanSessionInput").checked;
-
-		client = new Paho.MQTT.Client(hostname, Number(port), path, user);
-		// set callback handlers
-		client.onConnectionLost = onConnectionLost;
-		client.onMessageArrived = onMessageArrived;
-
-		client.connect({
-			onSuccess: onConnect,
-			mqttVersion: 4,
-			cleanSession: cleanSession,
-			onFailure: onFailure
-		});
-	}
-}
-
-
 function onFailure(err) {
 	alert(err.errorCode + " " + err.errorMessage);
 }
@@ -206,9 +171,11 @@ function makeid() {
 async function requestState(){
 	let x = document.getElementById("epos_refresh_state_icon");
 	x.className += " fa-spin";
-	let jsonMessage = {request: "stateID"};
-	jsonMessage = JSON.stringify(jsonMessage);
-	client.send(eposTopic + "rpc/request", payload=jsonMessage, qos=2, retained=false);
+	if(connected){
+		let jsonMessage = {request: "stateID"};
+		jsonMessage = JSON.stringify(jsonMessage);
+		client.send(eposTopic + "rpc/request", payload=jsonMessage, qos=2, retained=false);
+    }
 	await sleep(2000);
 	if(x.className!=="fa fa-sync"){
 		console.log("Request state timeout");
@@ -218,4 +185,36 @@ async function requestState(){
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// connect the client
+function connectionToggle() {
+    if (connected) {
+        client.disconnect();
+        document.getElementById("led_serv_con").className = "led led-red";
+        document.getElementById("led_con_controller").className = "led led-red";
+        document.getElementById("led_bat").className = "led led-red";
+        document.getElementById("led_can").className = "led led-red";
+        document.getElementById("server-settings").disabled = false;
+        connected = false;
+        document.getElementById("clientConnectButton").innerText = "Connect";
+    } else {
+        hostname = document.getElementById("hostInput").value;
+        port = document.getElementById("portInput").value;
+        path = document.getElementById("pathInput").value;
+        cleanSession = document.getElementById("cleanSessionInput").checked;
+        retained = document.getElementById("cleanSessionInput").checked;
+
+        client = new Paho.MQTT.Client(hostname, Number(port), path, user);
+        // set callback handlers
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+
+        client.connect({
+            onSuccess: onConnect,
+            mqttVersion: 4,
+            cleanSession: cleanSession,
+            onFailure: onFailure
+        });
+    }
 }

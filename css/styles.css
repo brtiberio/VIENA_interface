@@ -73,10 +73,10 @@ tbody {
     -moz-transition: 0.15s ease-out;
     -o-transition: 0.15s ease-out;
     transition: 0.15s ease-out;
-    -webkit-transition-property: opacity background;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    transition-property: opacity background;
+    -webkit-transition-property: opacity, background;
+    -moz-transition-property: opacity, background;
+    -o-transition-property: opacity, background;
+    transition-property: opacity, background;
 }
 .switch-label:before, .switch-label:after {
     position: absolute;
